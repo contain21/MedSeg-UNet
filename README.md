@@ -10,7 +10,7 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Dataset](https://img.shields.io/badge/Dataset-ISIC2018-orange.svg)](https://challenge.isic-archive.com/)
 
-[**🇬🇧 English**](README.md) | **🇨🇳 简体中文**
+[**🇬🇧 English**](README-ENG.md) | **🇨🇳 简体中文**
 
 </div>
 
