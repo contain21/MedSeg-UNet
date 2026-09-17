@@ -66,9 +66,9 @@ DoubleU-Net 堆叠两个 U-Net 子网络：第一个执行粗分割，第二个�
 
 <div align="center">
 
-```
+
 <img width="623" height="360" alt="image" src="https://github.com/user-attachments/assets/8a399a13-8c37-4799-8535-d0e4b2606a5b" />
-```
+
 
 </div>
 
