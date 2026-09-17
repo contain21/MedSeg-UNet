@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI医学影像分析</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 左侧边栏 -->
+        <div class="sidebar">
+            <!-- 收起边栏和搜索图标 -->
+            <div class="sidebar-header">
+                <button id="toggle-sidebar" class="sidebar-button">
+                    <svg viewBox="0 0 24 24" width="40" height="40">
+                        <path fill="currentColor" d="M8 8l-8 8 8 8M18 8l8 8-8 8" />
+                    </svg>
+                </button>
+                <button id="search-btn" class="sidebar-button">
+                    <svg viewBox="0 0 24 24" width="18" height="18">
+                        <path fill="currentColor" d="M10 2a8 8 0 1 1-8 8 8 8 0 0 1 8-8zm0 14a6 6 0 1 0-6-6 6 6 0 0 0 6 6zm8.707 6.707l-5.707-5.707A6.958 6.958 0 0 0 18 10a8 8 0 1 1-8 8 8 8 0 0 1 8-8z"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- 新对话按钮 -->
+            <button id="new-chat" class="sidebar-button">
+                <svg viewBox="0 0 24 24" width="30" height="30">
+                    <path fill="currentColor" d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 20l4-4h12c1.1 0 1.99-.9 1.99-2V4c0-1.1-.9-2-2-2z"></path>
+                </svg>
+                <span id="new-chat-text">开启新对话</span>
+            </button>
+
+            <div class="history-list" id="history-list">
+                <!-- 历史记录将在这里动态生成 -->
+            </div>
+
+            <!-- 清空按钮 -->
+            <div class="sidebar-footer">
+                <button id="clear-history">
+                    <svg viewBox="0 0 24 24" width="18" height="18">
+                        <path fill="currentColor" d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
+                    </svg>
+                    <span id="clear-history-text">清空记录</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 右侧主内容区 -->
+        <div class="main-content">
+            <!-- 新增的顶部栏 -->
+            <div class="top-bar">
+            <!-- 新增的设置按钮 -->
+                <button id="settings-btn" class="settings-btn">
+                    <svg viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="currentColor" d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66z"/>
+                    </svg>
+                </button>
+                <h2 class="title-center" id="title">医学图像分割系统</h2>
+            </div>
+            <!-- 设置面板 (默认隐藏) -->
+            <!-- 设置面板 (默认隐藏) -->
+            <!-- 设置面板 (默认隐藏) -->
+            <div id="settings-panel" class="settings-panel">
+                <div class="settings-header">
+                    <div class="settings-tabs">
+                        <button class="tab-btn active" data-tab="general" id="aboutset">通用设置</button>
+                        <button class="tab-btn" data-tab="model" id="aboutmodel">模型相关</button>
+                        <button class="tab-btn" data-tab="dataset" id="aboutdata">数据集相关</button>
+                    </div>
+                    <button id="close-settings" class="close-btn">&times;</button>
+                </div>
+
+                <div class="settings-content">
+                    <!-- 通用设置 -->
+                    <div id="general-tab" class="tab-content active">
+                        <div class="setting-item">
+                            <label id="theme_set">主题设置</label>
+                            <div class="theme-options">
+                                <button class="theme-btn light" data-theme="light">浅色</button>
+                                <button class="theme-btn dark" data-theme="dark">深色</button>
+                            </div>
+                        </div>
+                       <div class="setting-item">
+                            <label id="language_set">语言设置</label>
+                            <div class="theme-options">
+                                <button class="language-btn active" data-lang="zh">中文</button>
+                                <button class="language-btn" data-lang="en">English</button>
+                            </div>
+                       </div>
+                    </div>
+
+                    <!-- 模型相关 -->
+                    <div class="setting-item">
+                        <label id="log_chart_title">模型训练日志可视化</label>
+                        <div id="log-chart-container" style="width: 100%; height: 500px;"></div>
+                    </div>
+
+
+
+
+                    <!-- 数据集相关 -->
+
+                </div>
+            </div>
+            <div class="chat-container">
+                <!-- 聊天消息区域 -->
+                <div class="chat-area" id="chat-area">
+                    <div class="message welcome-message">
+                        <div class="welcome-content">
+                            <h3 id="welcome-title">我是MedSeg，很高兴为您服务！</h3>
+                            <p id="welcome-msg">请上传皮肤病变图片，我将为您分析分割结果</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 底部输入区 -->
+            <div class="input-box">
+                <input
+                    type="text"
+                    id="user-input"
+                    placeholder="输入问题或拖放图片进行分析..."
+                >
+                <div class="bottom-bar">
+                    <div class="model-selector">
+                        <select id="model-select">
+                            {% for model in models %}
+                            <option value="{{ model }}">{{ model }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <!-- 底部右边两个按钮 -->
+                    <div class="right-actions">
+                        <div class="upload-btn-wrapper">
+                            <button class="attach-btn">
+                                <svg viewBox="0 0 24 24" width="20" height="20">
+                                    <path fill="currentColor" d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5z"></path>
+                                </svg>
+                            </button>
+                            <input type="file" id="image-upload" accept="image/*">
+                        </div>
+                        <button id="send-btn">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+            <!-- 免责声明区域 -->
+            <div class="disclaimer">
+                <small id="disclaimer">AI生成内容仅供参考</small>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- 引入 Plotly 库 -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
