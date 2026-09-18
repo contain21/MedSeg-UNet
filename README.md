@@ -183,7 +183,7 @@ The platform adopts a **front-end / back-end separation** architecture:
 | **Session Management** | Automatically save history by timestamp; supports full-text keyword search with highlighting, renaming, deletion, and context preview. |
 | **UI/UX** | Light/dark theme switching, responsive layout, collapsible sidebar, hover animations, and dynamic button feedback. |
 
-
+<div align="center">
 <img width="591" height="293" alt="image" src="https://github.com/user-attachments/assets/086f3dde-90b4-4ed0-89a3-613cfb5b69d3" />
 <img width="493" height="323" alt="image" src="https://github.com/user-attachments/assets/c5b4e5c5-680a-4686-a085-1cc03da87a5b" />
 <img width="622" height="338" alt="image" src="https://github.com/user-attachments/assets/266aacb8-38ce-435a-a65d-e73d05df18a2" />
@@ -193,7 +193,7 @@ The platform adopts a **front-end / back-end separation** architecture:
 <img width="624" height="278" alt="image" src="https://github.com/user-attachments/assets/71b51f60-7279-44ce-84a3-f4b30bb8f871" />
 <img width="623" height="309" alt="image" src="https://github.com/user-attachments/assets/ab9539c2-b78e-44d3-ba45-f0445bde13dc" />
 <img width="624" height="310" alt="image" src="https://github.com/user-attachments/assets/15fcf9e5-47fb-4227-a2f0-330880991961" />
-
+</div>
 ---
 
 
