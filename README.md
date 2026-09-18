@@ -109,11 +109,44 @@ To address these issues, this project introduces:
 | ColorJitter | brightness=0.2, contrast=0.2, saturation=0.2 |
 | Normalize | mean=[0.708, 0.582, 0.536], std=[0.157, 0.166, 0.181] |
 
-> 📌 The normalization statistics are **recomputed from the ISIC2018 training set**, rather than reusing the default ImageNet values. Because dermatoscopic images have a relatively narrow color distribution, custom normalization significantly improves convergence speed and training stability.
+<div align="center">
+<img width="530" height="205" alt="image" src="https://github.com/user-attachments/assets/0438da96-f25a-4464-9af4-d1d936dad4d3" />
 
+</div>
+<div align="center">
+<img width="545" height="204" alt="image" src="https://github.com/user-attachments/assets/958460a4-ebd1-431b-b942-c806aa969db8" />
+
+</div>
+
+> 📌 The normalization statistics are **recomputed from the ISIC2018 training set**, rather than reusing the default ImageNet values. Because dermatoscopic images have a relatively narrow color distribution, custom normalization significantly improves convergence speed and training stability.
+<div align="center">
+<img width="600" height="247" alt="image" src="https://github.com/user-attachments/assets/cb6d0638-d657-4c68-b857-aa127e198ede" />
+<img width="596" height="288" alt="image" src="https://github.com/user-attachments/assets/3598dd42-3109-4a84-8684-bf5ed7f0362a" />
+<img width="611" height="287" alt="image" src="https://github.com/user-attachments/assets/0004e6f3-0700-4883-9e7e-8f3715a89344" />
+
+</div>
 ---
 
-## 🖥️ System Architecture
+## 🚀 training data
+<div align="center">
+<img width="444" height="250" alt="image" src="https://github.com/user-attachments/assets/b8e13b49-407f-413c-b36f-1691abbf11ed" />
+<img width="461" height="259" alt="image" src="https://github.com/user-attachments/assets/c914c4a8-c8a7-43e3-940f-c5b277f78e7c" />
+<img width="432" height="250" alt="image" src="https://github.com/user-attachments/assets/6785c3dc-b7af-494b-bccb-b3f9de1eb82a" />
+<img width="427" height="250" alt="image" src="https://github.com/user-attachments/assets/4c28f6a6-4049-453a-8488-ecca018af246" />
+
+</div>
+
+### Qualitative analysis
+<div align="center">
+<img width="526" height="265" alt="image" src="https://github.com/user-attachments/assets/d3dbe99f-0bcf-4038-a6e6-6470a53088ba" />
+<img width="584" height="294" alt="image" src="https://github.com/user-attachments/assets/ba052a0a-318c-4e55-a328-5833e9b990d7" />
+<img width="589" height="297" alt="image" src="https://github.com/user-attachments/assets/06cfafc1-5d4c-4c2a-a63a-3a9d2d3930d7" />
+<img width="624" height="314" alt="image" src="https://github.com/user-attachments/assets/bf62be38-871e-46ed-9fb9-56aefd1f60cc" />
+
+</div>
+
+
+##  🖥️ System Architecture
 
 The platform adopts a **front-end / back-end separation** architecture:
 
@@ -149,6 +182,17 @@ The platform adopts a **front-end / back-end separation** architecture:
 | **Spark LLM Assistant** | Ask natural-language questions about model architecture, metric definitions, dataset background, and segmentation result interpretation. |
 | **Session Management** | Automatically save history by timestamp; supports full-text keyword search with highlighting, renaming, deletion, and context preview. |
 | **UI/UX** | Light/dark theme switching, responsive layout, collapsible sidebar, hover animations, and dynamic button feedback. |
+
+
+<img width="591" height="293" alt="image" src="https://github.com/user-attachments/assets/086f3dde-90b4-4ed0-89a3-613cfb5b69d3" />
+<img width="493" height="323" alt="image" src="https://github.com/user-attachments/assets/c5b4e5c5-680a-4686-a085-1cc03da87a5b" />
+<img width="622" height="338" alt="image" src="https://github.com/user-attachments/assets/266aacb8-38ce-435a-a65d-e73d05df18a2" />
+<img width="624" height="116" alt="image" src="https://github.com/user-attachments/assets/d273a1d1-d95e-4a74-a8bd-7417f03220aa" />
+<img width="593" height="268" alt="image" src="https://github.com/user-attachments/assets/fb53d10d-8004-41d6-95ea-8cf75917b90b" />
+<img width="624" height="146" alt="image" src="https://github.com/user-attachments/assets/685c1676-f7ee-40db-8c9b-c754cb5706da" />
+<img width="624" height="278" alt="image" src="https://github.com/user-attachments/assets/71b51f60-7279-44ce-84a3-f4b30bb8f871" />
+<img width="623" height="309" alt="image" src="https://github.com/user-attachments/assets/ab9539c2-b78e-44d3-ba45-f0445bde13dc" />
+<img width="624" height="310" alt="image" src="https://github.com/user-attachments/assets/15fcf9e5-47fb-4227-a2f0-330880991961" />
 
 ---
 
