@@ -1,4 +1,3 @@
-<div align="center">
 
 # MedSeg-UNet
 
@@ -64,6 +63,7 @@ DoubleU-Net 堆叠两个 U-Net 子网络：第一个执行粗分割，第二个�
 | **MultiResBlock** | 仿 Inception 的并行多尺度卷积（3×3、5×5、7×7）配合残差连接，扩大感受野并捕捉多尺度特征。 |
 | **ResPath** | 残差跳跃连接，在编码器特征与解码器特征融合前进行渐进式精炼，缩小语义鸿沟。 |
 
+模型架构图如下：
 <div align="center">
 
 
@@ -111,10 +111,42 @@ DoubleU-Net 堆叠两个 U-Net 子网络：第一个执行粗分割，第二个�
 | ColorJitter（颜色扰动） | brightness=0.2, contrast=0.2, saturation=0.2 |
 | Normalize（标准化） | mean=[0.708, 0.582, 0.536], std=[0.157, 0.166, 0.181] |
 
-> 📌 标准化统计量是**基于 ISIC2018 训练集重新计算**的，而非沿用 ImageNet 预设值。由于皮肤镜图像色彩分布较窄，自定义归一化显著提升了收敛速度与训练稳定性。
+<div align="center">
+<img width="530" height="205" alt="image" src="https://github.com/user-attachments/assets/0438da96-f25a-4464-9af4-d1d936dad4d3" />
 
+</div>
+<div align="center">
+<img width="545" height="204" alt="image" src="https://github.com/user-attachments/assets/958460a4-ebd1-431b-b942-c806aa969db8" />
+
+</div>
+
+> 📌 标准化统计量是**基于 ISIC2018 训练集重新计算**的，而非沿用 ImageNet 预设值。由于皮肤镜图像色彩分布较窄，自定义归一化显著提升了收敛速度与训练稳定性。
+> 
+<div align="center">
+<img width="600" height="247" alt="image" src="https://github.com/user-attachments/assets/cb6d0638-d657-4c68-b857-aa127e198ede" />
+<img width="596" height="288" alt="image" src="https://github.com/user-attachments/assets/3598dd42-3109-4a84-8684-bf5ed7f0362a" />
+<img width="611" height="287" alt="image" src="https://github.com/user-attachments/assets/0004e6f3-0700-4883-9e7e-8f3715a89344" />
+
+</div>
 ---
 
+## 🚀 训练数据
+<div align="center">
+<img width="444" height="250" alt="image" src="https://github.com/user-attachments/assets/b8e13b49-407f-413c-b36f-1691abbf11ed" />
+<img width="461" height="259" alt="image" src="https://github.com/user-attachments/assets/c914c4a8-c8a7-43e3-940f-c5b277f78e7c" />
+<img width="432" height="250" alt="image" src="https://github.com/user-attachments/assets/6785c3dc-b7af-494b-bccb-b3f9de1eb82a" />
+<img width="427" height="250" alt="image" src="https://github.com/user-attachments/assets/4c28f6a6-4049-453a-8488-ecca018af246" />
+
+</div>
+
+### 定性分析
+<div align="center">
+<img width="526" height="265" alt="image" src="https://github.com/user-attachments/assets/d3dbe99f-0bcf-4038-a6e6-6470a53088ba" />
+<img width="584" height="294" alt="image" src="https://github.com/user-attachments/assets/ba052a0a-318c-4e55-a328-5833e9b990d7" />
+<img width="589" height="297" alt="image" src="https://github.com/user-attachments/assets/06cfafc1-5d4c-4c2a-a63a-3a9d2d3930d7" />
+<img width="624" height="314" alt="image" src="https://github.com/user-attachments/assets/bf62be38-871e-46ed-9fb9-56aefd1f60cc" />
+
+</div>
 ## 🖥️ 系统架构
 
 平台采用**前后端分离**架构：
@@ -153,93 +185,15 @@ DoubleU-Net 堆叠两个 U-Net 子网络：第一个执行粗分割，第二个�
 | **会话管理** | 自动按时间戳保存历史，支持关键词全文检索高亮、重命名、删除与上下文预览。 |
 | **UI/UX** | 浅色/深色主题切换、响应式布局、可折叠侧边栏、悬停动画与动态按钮反馈。 |
 
----
-
-## 🚀 快速开始
-
-### 1. 环境准备
-
-```bash
-# 推荐 Python 3.8+
-git clone https://github.com/your-username/MedSeg-UNet.git
-cd MedSeg-UNet
-
-# 创建虚拟环境
-python -m venv venv
-source venv/bin/activate   # Linux/macOS
-# venv\Scripts\activate    # Windows
-
-# 安装依赖
-pip install -r requirements.txt
-```
-
-### 2. 准备数据集
-
-从 [ISIC Archive](https://challenge.isic-archive.com/landing/2018/) 下载 **ISIC2018 Task 1（病灶边界分割）**，按如下结构组织：
-
-```
-data/
-├── ISIC2018_Task1-2_Training_Input/        # 2594 张原始图像
-├── ISIC2018_Task1_Training_GroundTruth/     # 2594 张真实标注掩膜
-├── ISIC2018_Task1-2_Validation_Input/      # 100 张验证图像
-└── ISIC2018_Task1_Validation_GroundTruth/   # 100 张验证掩膜
-```
-
-### 3. 训练模型
-
-```bash
-python train.py \
-    --model improved_doubleunet \
-    --data_dir ./data \
-    --epochs 50 \
-    --batch_size 8 \
-    --lr 1e-4 \
-    --image_size 256 \
-    --output ./checkpoints
-```
-
-### 4. 启动 Web 系统
-
-```bash
-# 配置讯飞星火 API 密钥
-export SPARK_API_KEY="your_api_key_here"
-export SPARK_API_SECRET="your_api_secret_here"
-
-# 启动 Flask 服务
-python app.py
-# 浏览器访问 http://127.0.0.1:5000
-```
-
----
-
-## 📁 项目结构
-
-```
-MedSeg-UNet/
-├── models/                         # 网络定义
-│   ├── unet.py
-│   ├── multiresunet.py
-│   ├── doubleunet.py
-│   └── improved_doubleunet.py     # 本项目改进架构
-├── modules/
-│   ├── multires_block.py           # MultiResBlock
-│   └── respath.py                  # ResPath
-├── data/                            # 数据集（已 gitignore）
-├── utils/
-│   ├── dataset.py                  # PyTorch Dataset 与数据增强
-│   ├── metrics.py                  # IoU、Dice、Precision、Recall
-│   └── visualize.py                # 边界叠加与区域着色可视化
-├── checkpoints/                    # 训练权重
-├── static/                         # 前端资源（CSS/JS/图像）
-├── templates/                      # HTML 模板
-├── train.py                        # 训练入口
-├── predict.py                      # 推理工具
-├── app.py                          # Flask 应用
-├── spark_client.py                 # 讯飞星火大模型客户端
-├── requirements.txt
-├── README.md                        # 英文版
-└── README.zh-CN.md                  # 中文版（本文件）
-```
+<img width="591" height="293" alt="image" src="https://github.com/user-attachments/assets/086f3dde-90b4-4ed0-89a3-613cfb5b69d3" />
+<img width="493" height="323" alt="image" src="https://github.com/user-attachments/assets/c5b4e5c5-680a-4686-a085-1cc03da87a5b" />
+<img width="622" height="338" alt="image" src="https://github.com/user-attachments/assets/266aacb8-38ce-435a-a65d-e73d05df18a2" />
+<img width="624" height="116" alt="image" src="https://github.com/user-attachments/assets/d273a1d1-d95e-4a74-a8bd-7417f03220aa" />
+<img width="593" height="268" alt="image" src="https://github.com/user-attachments/assets/fb53d10d-8004-41d6-95ea-8cf75917b90b" />
+<img width="624" height="146" alt="image" src="https://github.com/user-attachments/assets/685c1676-f7ee-40db-8c9b-c754cb5706da" />
+<img width="624" height="278" alt="image" src="https://github.com/user-attachments/assets/71b51f60-7279-44ce-84a3-f4b30bb8f871" />
+<img width="623" height="309" alt="image" src="https://github.com/user-attachments/assets/ab9539c2-b78e-44d3-ba45-f0445bde13dc" />
+<img width="624" height="310" alt="image" src="https://github.com/user-attachments/assets/15fcf9e5-47fb-4227-a2f0-330880991961" />
 
 ---
 
